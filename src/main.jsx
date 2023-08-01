@@ -11,7 +11,7 @@ import Register from './components/Register';
 import Logout from "./components/logout";
 import MyThings from "./components/mythings";
 import CreatePost from './components/createpost';
-import MyMessages from "./components/mymessages";
+//import MyMessages from "./components/mymessages";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +31,10 @@ const router = createBrowserRouter([
         path: "/createpost",
         element: <CreatePost />,
       },
-      {
-        path: "/mymessages",
-        element: <MyMessages />,
-      },
+      // {
+      //   path: "/mymessages",
+      //   element: <MyMessages />,
+      // },
       {
         path: "/login",
         element: <Login />,

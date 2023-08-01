@@ -58,13 +58,13 @@ const MyThings = () => {
                 >
                   Deleate Post
                 </button>
-                <button
+                {/* <button
                   type="submit"
                   onClick={console.log("hi")}
                   className="bg-green-300 text-slate-700 py-1 my-6 rounded font-bold px-4"
                 >
                   Edit Post
-                </button>
+                </button> */}
               </div>
             </div>
           ))} 
