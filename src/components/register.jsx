@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerEndpoint } from "../api";
 
 const Register = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+  
   const handleUserChange = (event) => {
     setUserName(event.target.value);
     console.log(userName);
@@ -25,7 +27,7 @@ const Register = () => {
     } catch (err) {
       console.error(err);
     }
-
+    navigate("/mythings");
   };
 
   return (

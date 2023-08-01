@@ -155,7 +155,6 @@ export const loginEndpoint = async (userName, passWord) => {
           },
         }),
       });
-      console.log('RESPONSE - - - ',response);
       const result = await response.json();
 
       
@@ -216,3 +215,45 @@ export const logOut = () => {
   localStorage.removeItem('passWord')
   console.log("Purged");
 }
+
+/////////////////////////////////////////////////
+// export const createMessage = ({ postId, message, token}) => {
+//     //author = post author
+    
+//     //if token, then can create message
+
+
+
+
+
+//     //else send them packing
+
+
+// } 
+export const createMessage = async ({ postId, message }) => {
+  try {
+    console.log('CREATE MESSSAGE DATA: ', postId, message)
+    // const apiURL = `${BASE_URL}/posts/${postId}/messages`
+    // let bearerKey = `Bearer ${localStorage.getItem("token")}`;
+    // bearerKey = bearerKey.replace(/"/g, "");
+    
+    // const response = await fetch( apiURL, {
+    //   method: "POST",
+    //   headers: {
+    //     'Content-Type': 'application/json', 
+    //     'Authorization': bearerKey,
+    //     },
+    //   body: JSON.stringify({
+    //     message: {
+    //       content: message,
+    //     },
+    //   }),
+    // });
+    
+    // const result = await response.json();
+    // console.log(result);
+    // return result;
+  } catch (error) {
+    console.error(error);
+  }
+};

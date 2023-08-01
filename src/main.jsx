@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import './index.css';
-
+//import Message from "./components/createmessage";
 import Root from "./routes/root";
 import ErrorPage from "./error-page";
 import Things from "./components/things";
@@ -11,7 +11,7 @@ import Register from './components/Register';
 import Logout from "./components/logout";
 import MyThings from "./components/mythings";
 import CreatePost from './components/createpost';
-//import Messages from "./components/messages";
+import MyMessages from "./components/mymessages";
 
 const router = createBrowserRouter([
   {
@@ -31,10 +31,10 @@ const router = createBrowserRouter([
         path: "/createpost",
         element: <CreatePost />,
       },
-    //   // {
-    //   //   path: "/messages",
-    //   //   element: <Messages />,
-    //   // },
+      {
+        path: "/mymessages",
+        element: <MyMessages />,
+      },
       {
         path: "/login",
         element: <Login />,

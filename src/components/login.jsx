@@ -19,10 +19,7 @@ const Login = () => {
   };
 
   const handleSubmitButton = async (event) => {
-    event.preventDefault();
-    console.log("I have clicked a button");
-    //const apiURL = `${BASE_URL}/users/login`;
-    //console.log(apiURL);
+    event.preventDefault(); //DO NOT FORGET THIS !!!!!
     try {     
        if(password && userName){
           const result = await loginEndpoint(userName, password);

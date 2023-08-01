@@ -37,7 +37,8 @@ const MyThings = () => {
     }
     navigate("/mythings")
   }
-  if (localStorage.getItem("token")) {
+  
+  if (posting.length > 0) {
   return (
     <>
       <div id="posts">
@@ -72,17 +73,33 @@ const MyThings = () => {
   );
           }
     else{
-    return (
-      <>
-        <div className="flex-col p-4 rounded-lg bg-blue-100 text-black-600  text-2xl">
-          <label>You must be logged in to view your posts</label>
+      if (!localStorage.getItem("token")){
+        return (
+          <>
+            <div className="flex-col p-4 rounded-lg bg-blue-100 text-black-600  text-2xl">
+              <label>You must be logged in to view your posts</label>
 
-          <div >
-            <Link to={`/things`}>Home</Link>
-          </div>
-        </div>
-      </>
-    );
+              <div>
+                <Link to={`/things`}>Home</Link>
+              </div>
+            </div>
+          </>
+        )
+      } else {
+        return (
+          <>
+            <div className="flex-col p-4 rounded-lg bg-blue-100 text-black-600  text-2xl">
+              <label>
+                You have <u>NOT</u> created any posts!
+              </label>
+
+              <div>
+                <Link to={`/things`}>Home</Link>
+              </div>
+            </div>
+          </>
+        );
+      }
   }
 };
 
