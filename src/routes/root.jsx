@@ -1,20 +1,7 @@
-import { Outlet, Link, Form } from "react-router-dom"
-import { useState } from "React"
-
-
+import { Outlet, Link } from "react-router-dom"
 
 const Root = () => {
-  const [query, setQuery] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState({
-    query: '', 
-    list: []
-  })
-
-  const handleSearchChange = (event) => {
-    setQuery(event.target.value);
-  }
-
-  return (
+ return (
     <>
       <div id="sidebar">
         <h1 id="title">Stranger&apos;s Things</h1>
@@ -25,7 +12,8 @@ const Root = () => {
               aria-label="Search contacts"
               placeholder="Search"
               type="search"
-              value={query} onChange={handleSearchChange}
+              value={1}
+              
               name="q"
             />
             <div id="search-spinner" aria-hidden hidden={true} />
@@ -43,6 +31,9 @@ const Root = () => {
             <li>
               <Link to={`/createpost`}>Create a Post</Link>
             </li>
+            {/* <li>
+              <Link to={`/messages`}>My Messages</Link>
+            </li> */}
             <li>
               <Link to={`/login`}>Log in</Link>
             </li>

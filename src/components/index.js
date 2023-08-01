@@ -5,5 +5,6 @@ module.exports = {
   ...require("./mythings"), // etc
   ...require("./register"),
   ...require("./things"), // etc
-  ...require("./createpost")
+  ...require("./createpost"),
+  
 };

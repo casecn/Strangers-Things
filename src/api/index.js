@@ -1,12 +1,11 @@
-import { useAsyncValue } from "react-router-dom";
-import { getStoredValue } from "./useLocalStorage";
-import { useState, useEffect } from "react";
 
 // Setup path and access to strangers-things api.
 
 const COHORT_NAME = "2303-FTB-MT-WEB-PT";
 export const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
 
+
+/////////////////////////////////////////////////
 export const retrieveAllPosts = async () => {
   let apiURL = `${BASE_URL}/posts`;
   // if (localStorage.getItem('token')) {
@@ -26,13 +25,13 @@ export const retrieveAllPosts = async () => {
       throw jsonData.error;
     }
     let posts = [...jsonData.data.posts];
-    //console.log({posts, Line: 18});
     return posts;
   } catch (error) {
     console.log(`ERROR-retrieveAllPosts: ${error}`);
   }
 };
 
+/////////////////////////////////////////////////
 export const retrieveMyPosts = async () => {
    let apiURL = `${BASE_URL}/posts`;
    let bearerKey = `Bearer ${localStorage.getItem("token")}`;
@@ -58,7 +57,8 @@ export const retrieveMyPosts = async () => {
     console.log(`ERROR-retrieveAllPosts: ${error}`);
   }
 };
-export const createPost = async (
+/////////////////////////////////////////////////
+export const createPostEndpoint= async (
   title,
   description,
   price,
@@ -103,7 +103,7 @@ export const createPost = async (
 console.error("ERROR CREATING A POST!  ERROR MESSAGE:", error);
   }
 };
-
+/////////////////////////////////////////////////
 export const deletePost = async ( postId ) => {
   if (!localStorage.getItem("token")) {
     window.alert("You must be logged in to delete a post.");
@@ -131,14 +131,15 @@ export const deletePost = async ( postId ) => {
   } catch (error) {
     console.error("ERROR DELETING A POST!  ERROR MESSAGE:", error);
   }
-};
+}
 }
 
-
+/////////////////////////////////////////////////
 export const loginEndpoint = async (userName, passWord) => {
   console.log({ userName });
   console.log({ passWord });
   let apiURL = `${BASE_URL}/users/login`;
+  console.log("APIURL _ - ", apiURL)
   try {
     let token = ""  
     const response = await fetch(apiURL, {
@@ -148,14 +149,16 @@ export const loginEndpoint = async (userName, passWord) => {
         },
         body: JSON.stringify({
           user: {
+     
             username: userName,
             password: passWord,
           },
         }),
       });
+      console.log('RESPONSE - - - ',response);
       const result = await response.json();
 
-      //console.log(result.success);
+      
       if (result.success) {
         token = result.data.token;
         localStorage.setItem("token", JSON.stringify(token));
@@ -166,11 +169,12 @@ export const loginEndpoint = async (userName, passWord) => {
         token = "not logged in"
       }
       return token;
-    } catch (err) {
-    console.error(err);
+    } catch (error) {
+    console.error("LOGIN END POINT ERROR:", error);
   }
 };
 
+/////////////////////////////////////////////////
 export const registerEndpoint = async ( userName, passWord) => {
   console.log(`UserName: `, userName);
   console.log(`Password: `, passWord);
@@ -198,17 +202,16 @@ export const registerEndpoint = async ( userName, passWord) => {
       localStorage.setItem("token", JSON.stringify(token));
       localStorage.setItem("userName", JSON.stringify(userName));
     } else {
-      window.alert("Login Failed!");
-      token = "not logged in";
+      window.alert("Registration Failed!");
     }
-    return token;
+    return true;
   } catch (err) {
     console.error(err);
   }
 };
 
+/////////////////////////////////////////////////
 export const logOut = () => {
-  
   localStorage.removeItem('token');
   localStorage.removeItem('passWord')
   console.log("Purged");

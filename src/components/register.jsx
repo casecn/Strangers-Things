@@ -6,21 +6,21 @@ const Register = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleUserChange = (e) => {
-    setUserName(e.target.value);
+  const handleUserChange = (event) => {
+    setUserName(event.target.value);
     console.log(userName);
   };
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
     console.log(password);
   };
 
-  const handleSubmitButton = async (e) => {
-    e.preventDefault();
+  const handleSubmitButton = async (event) => {
+    event.preventDefault();
     try {
       if(password && userName){
-        const newToken = await registerEndpoint(userName, password);
-        console.log(`newToken`, newToken);
+        await registerEndpoint(userName, password);
+        console.log(`newToken`, localStorage.getItem("token"));
       }
     } catch (err) {
       console.error(err);
@@ -42,7 +42,6 @@ const Register = () => {
                 <input
                   type="text"
                   required
-                  value={userName}
                   onChange={handleUserChange}
                   className="p-3 my-2 rounded text-black"
                   placeholder="User Name"

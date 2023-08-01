@@ -5,7 +5,6 @@ import { loginEndpoint } from "../api";
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   const navigate = useNavigate();
 
@@ -13,30 +12,37 @@ const Login = () => {
     setUserName(event.target.value);
     console.log(userName);
   };
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    console.log(password);
+     console.log(password);
   };
 
   const handleSubmitButton = async (event) => {
-        //console.log("I have clicked a button");
+    event.preventDefault();
+    console.log("I have clicked a button");
     //const apiURL = `${BASE_URL}/users/login`;
     //console.log(apiURL);
     try {     
        if(password && userName){
-          await loginEndpoint(userName, password);
-          if(localStorage.getItem('token')){
-            setIsLoggedIn(true);
+          const result = await loginEndpoint(userName, password);
+          if(result){
+          console.log(
+            `STORED USER Name:`,
+            localStorage.getItem("userName"),
+            result
+          )} else {
+            throw("Login Failed!")
           }
-          //console.log(`STORED USER Name:`, localStorage.getItem('userName'))
+
         }
-       } catch (err) {
-      console.error(err);
+       } catch (error) {
+      console.error("Login Submit Error: ",error);
     }
     navigate("/mythings");
   };
 
-  if (!isLoggedIn) {
+  if (!localStorage.getItem("token")) {
     return (
       <>
         <div className="bg-black/50 fixed top-0 left-0 w-full h-screen">
@@ -49,7 +55,6 @@ const Login = () => {
                   <input
                     type="text"
                     required
-                    value={userName}
                     onChange={handleUserChange}
                     className="p-3 my-2 rounded text-black"
                     placeholder="User Name"
@@ -83,8 +88,7 @@ const Login = () => {
         </div>
       </>
     );
-  }
-  else{
+  } else {
     return (
       <>
         <label className="text-red-600  text-5xl">Already Logged In!</label>;

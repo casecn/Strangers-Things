@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { retrieveAllPosts, loginEndpoint } from "../api";
+import { retrieveAllPosts } from "../api";
 import "../index.css";
 
 const Things = () => {

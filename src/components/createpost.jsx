@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createPost } from "../api";
+import { createPostEndpoint } from "../api";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -9,8 +9,6 @@ const CreatePost = () => {
   const [location, setLocation] = useState("Contact me");  
   const [willDeliver, setWillDeliver] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
   const navigate = useNavigate();
 
   const handleTitleChange = (event) => {
@@ -40,7 +38,13 @@ const CreatePost = () => {
     //console.log("I have clicked a button");
     try {     
        if(title && price){
-          const newToken = await createPost(title, description, price, location, willDeliver);
+          const newToken = await createPostEndpoint(
+            title,
+            description,
+            price,
+            location,
+            willDeliver
+          );
           
           console.log(`new post:`, newToken)
         }

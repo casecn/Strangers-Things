@@ -5,12 +5,13 @@ import './index.css';
 
 import Root from "./routes/root";
 import ErrorPage from "./error-page";
-import Things from "./routes/things"
+import Things from "./components/things";
 import Login from './components/login';
 import Register from './components/Register';
 import Logout from "./components/logout";
 import MyThings from "./components/mythings";
 import CreatePost from './components/createpost';
+//import Messages from "./components/messages";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: "/createpost",
         element: <CreatePost />,
       },
+    //   // {
+    //   //   path: "/messages",
+    //   //   element: <Messages />,
+    //   // },
       {
         path: "/login",
         element: <Login />,

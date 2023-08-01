@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { retrieveMyPosts, deletePost } from "../api";
 import { timeHelper } from "./helpers";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import "../index.css";
 
@@ -11,7 +11,7 @@ const MyThings = () => {
   const [posting, setPosting] = useState([]);
   const navigate = useNavigate();
   useEffect( ()=>{
-    //const posts = async () => {
+  //const posts = async () => {
       updatePosts();
   //     const allPosts = await retrieveMyPosts();
   //     return allPosts;
@@ -37,7 +37,7 @@ const MyThings = () => {
     }
     navigate("/mythings")
   }
-
+  if (localStorage.getItem("token")) {
   return (
     <>
       <div id="posts">
@@ -70,6 +70,21 @@ const MyThings = () => {
       </div>
     </>
   );
+          }
+    else{
+    return (
+      <>
+        <div className="flex-col p-4 rounded-lg bg-blue-100 text-black-600  text-2xl">
+          <label>You must be logged in to view your posts</label>
+
+          <div >
+            <Link to={`/things`}>Home</Link>
+          </div>
+        </div>
+      </>
+    );
+  }
 };
+
 
 export default MyThings;
